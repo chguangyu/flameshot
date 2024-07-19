@@ -210,7 +210,18 @@ int main(int argc, char* argv[])
     }
 #if defined(Q_OS_WIN)
     	new QCoreApplication(argc, argv);
-    	configureApp(false);
+    	configureApp(true);
+        if (!ConfigHandler().allowMultipleGuiInstances()) {
+            auto* mutex = guiMutexLock();
+            if (!mutex) {
+                return 1;
+            }
+            QObject::connect(
+              qApp, &QCoreApplication::aboutToQuit, qApp, [mutex]() {
+                  mutex->detach();
+                  delete mutex;
+              });
+        }
 	QString pathw= QString::fromUtf8(argv[1]);
         CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, 0, pathw);
         req.addSaveTask(pathw);
