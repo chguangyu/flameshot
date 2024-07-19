@@ -219,7 +219,8 @@ int main(int argc, char* argv[])
     }
 #if defined(Q_OS_WIN)
 	logMsg("init win");
-    	new QCoreApplication(argc, argv);
+        SingleApplication app(argc, argv);
+    	//new QCoreApplication(argc, argv);
 	logMsg("configApp true");
     	configureApp(true);
 	logMsg("setOrigin");
