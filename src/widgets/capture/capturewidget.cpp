@@ -366,6 +366,11 @@ void CaptureWidget::initButtons()
 
 void CaptureWidget::handleButtonRightClick(CaptureToolButton* b)
 {
+//modify cgy
+     close();
+//      deleteToolWidgetOrClose();
+     return;
+
     if (!b) {
         return;
     }

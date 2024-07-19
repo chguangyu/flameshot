@@ -183,12 +183,16 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
 // clang-format on
 
 // CLASS CONFIGHANDLER
-
+//cgy
+ConfigHandler::ConfigHandler()
+  : m_settings("anyshot.ini",QSettings::IniFormat)
+/*
 ConfigHandler::ConfigHandler()
   : m_settings(QSettings::IniFormat,
                QSettings::UserScope,
                qApp->organizationName(),
                qApp->applicationName())
+*/
 {
     static bool firstInitialization = true;
     if (firstInitialization) {
