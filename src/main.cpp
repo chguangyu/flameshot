@@ -89,8 +89,11 @@ void wayland_hacks()
 
 void requestCaptureAndWait(const CaptureRequest& req)
 {
+    logMsg("func requestCaptureAndWait");
     Flameshot* flameshot = Flameshot::instance();
+    logMsg("func requestCaptureAndWait  requestCapture");
     flameshot->requestCapture(req);
+    logMsg("func requestCaptureAndWait  Qobject::connect ");
     QObject::connect(flameshot, &Flameshot::captureTaken, [&](const QPixmap&) {
 #if defined(Q_OS_MACOS)
         // Only useful on MacOS because each instance hosts its own widgets
@@ -99,16 +102,22 @@ void requestCaptureAndWait(const CaptureRequest& req)
         }
 #else
         // if this instance is not daemon, make sure it exit after caputre finish
+	logMsg("check instance and haveExternalWidget");
         if (FlameshotDaemon::instance() == nullptr && !Flameshot::instance()->haveExternalWidget()) {
+	    logMsg("haveExternalWidget  and instance=nullptr exit");
             qApp->exit(0);
         }
 #endif
     });
+    logMsg("func requestCaptureAndWait  Qobject::connect  22");
     QObject::connect(flameshot, &Flameshot::captureFailed, []() {
         AbstractLogger::info() << "Screenshot aborted.";
+    	logMsg("func requestCaptureAndWait  Qobject::connect  exit");
         qApp->exit(1);
     });
+   logMsg("func requestCaptureAndWait  exec");
     qApp->exec();
+   logMsg("func requestCaptureAndWait  exec end");
 }
 
 QSharedMemory* guiMutexLock()
@@ -209,8 +218,13 @@ int main(int argc, char* argv[])
         return qApp->exec();
     }
 #if defined(Q_OS_WIN)
+	logMsg("init win");
     	new QCoreApplication(argc, argv);
+	logMsg("configApp true");
     	configureApp(true);
+	logMsg("setOrigin");
+    	Flameshot::setOrigin(Flameshot::CLI);
+	logMsg("init allowMultipleGuiInstances ");
         if (!ConfigHandler().allowMultipleGuiInstances()) {
             auto* mutex = guiMutexLock();
             if (!mutex) {
@@ -222,10 +236,15 @@ int main(int argc, char* argv[])
                   delete mutex;
               });
         }
+	logMsg("argv[1]=%s",argv[1]);
 	QString pathw= QString::fromUtf8(argv[1]);
+	logMsg("new req 0 ");
         CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, 0, pathw);
+	logMsg("addSaveTask");
         req.addSaveTask(pathw);
+	logMsg("request");
         requestCaptureAndWait(req);
+	logMsg("return 0");
 	return 0;
 #endif
 
