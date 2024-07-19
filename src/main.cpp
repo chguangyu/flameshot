@@ -7,7 +7,6 @@
 #include "QtSolutions/qtsingleapplication.h"
 #endif
 
-#include <stdio.h>
 
 #include "abstractlogger.h"
 #include "src/cli/commandlineparser.h"
@@ -34,6 +33,47 @@
 #include <QDBusMessage>
 #include <desktopinfo.h>
 #endif
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <stdarg.h>
+
+#define LOG_FILE "logfile.txt"
+
+void logMsg(const char *format, ...) {
+    // Open log file in append mode
+    FILE *log_file = fopen(LOG_FILE, "a");
+    if (!log_file) {
+        perror("Failed to open log file");
+        exit(EXIT_FAILURE);
+    }
+
+    // Get current time
+    time_t now;
+    time(&now);
+    struct tm *local_time = localtime(&now);
+
+    // Print time to log file
+    fprintf(log_file, "[%04d-%02d-%02d %02d:%02d:%02d] ",
+            local_time->tm_year + 1900,
+            local_time->tm_mon + 1,
+            local_time->tm_mday,
+            local_time->tm_hour,
+            local_time->tm_min,
+            local_time->tm_sec);
+
+    // Print the log message
+    va_list args;
+    va_start(args, format);
+    vfprintf(log_file, format, args);
+    va_end(args);
+
+    // Add a newline and close the log file
+    fprintf(log_file, "\n");
+    fclose(log_file);
+}
+
 
 #ifdef Q_OS_LINUX
 // source: https://github.com/ksnip/ksnip/issues/416
@@ -142,10 +182,14 @@ int main(int argc, char* argv[])
     // no arguments, just launch Flameshot
     if (argc == 1) {
 #ifndef USE_EXTERNAL_SINGLEAPPLICATION
+	logMsg("USE_EXTERNAL_SINGLEAPPLICATION");
         SingleApplication app(argc, argv);
+	logMsg("USE_EXTERNAL_SINGLEAPPLICATION End");
 	printf("any wind singleapp\n");
 #else
+	logMsg("NOT USE_EXTERNAL_SINGLEAPPLICATION");
         QtSingleApplication app(argc, argv);
+	logMsg("NOT USE_EXTERNAL_SINGLEAPPLICATION End");
 #endif
         configureApp(true);
         auto c = Flameshot::instance();
@@ -161,10 +205,12 @@ int main(int argc, char* argv[])
         dbus.registerObject(QStringLiteral("/"), c);
         dbus.registerService(QStringLiteral("org.flameshot.Flameshot"));
 #endif
+	logMsg("start exec");
         return qApp->exec();
     }
 
 #if !defined(Q_OS_WIN)
+    logMsg("no win cli arg>1");
     /*--------------|
      * CLI parsing  |
      * ------------*/
