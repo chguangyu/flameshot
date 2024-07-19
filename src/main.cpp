@@ -141,6 +141,7 @@ int main(int argc, char* argv[])
     if (argc == 1) {
 #ifndef USE_EXTERNAL_SINGLEAPPLICATION
         SingleApplication app(argc, argv);
+	printf("any wind singleapp\n");
 #else
         QtSingleApplication app(argc, argv);
 #endif
@@ -577,5 +578,6 @@ int main(int argc, char* argv[])
 finish:
 
 #endif
+	printf("any wind singleapp end\n");
     return 0;
 }
