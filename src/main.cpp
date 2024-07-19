@@ -208,7 +208,15 @@ int main(int argc, char* argv[])
 	logMsg("start exec");
         return qApp->exec();
     }
-
+#if defined (Q_OS_WIN){
+    	new QCoreApplication(argc, argv);
+    	configureApp(false);
+	QString pathw= QString::fromUtf8(argv[1]);
+        CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, 0, pathw);
+        req.addSaveTask(pathw);
+        requestCaptureAndWait(req);
+	return 0;
+}
 #if !defined(Q_OS_WIN)
     logMsg("no win cli arg>1");
     /*--------------|
