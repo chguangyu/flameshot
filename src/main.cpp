@@ -578,6 +578,6 @@ int main(int argc, char* argv[])
 finish:
 
 #endif
-	printf("any wind singleapp end\n");
+	printf("any wind singleapp end1\n");
     return 0;
 }
