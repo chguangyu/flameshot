@@ -6,7 +6,9 @@
 #else
 #include "QtSolutions/qtsingleapplication.h"
 #endif
+
 #include <stdio.h>
+
 #include "abstractlogger.h"
 #include "src/cli/commandlineparser.h"
 #include "src/config/cacheutils.h"
