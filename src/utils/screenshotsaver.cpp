@@ -52,7 +52,7 @@ bool saveToFilesystem(const QPixmap& capture,
     }
 
     if (okay) {
-        saveMessage += QObject::tr("Capture saved as ") + completePath;
+        saveMessage += QObject::tr("Capture saved as ") +"[[" +completePath+"]]";
         AbstractLogger::info().attachNotificationPath(notificationPath)
           << saveMessage;
     } else {
