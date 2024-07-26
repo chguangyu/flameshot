@@ -366,6 +366,11 @@ void CaptureWidget::initButtons()
 
 void CaptureWidget::handleButtonRightClick(CaptureToolButton* b)
 {
+//modify cgy
+     close();
+//      deleteToolWidgetOrClose();
+     return;
+
     if (!b) {
         return;
     }
@@ -655,6 +660,9 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
 void CaptureWidget::showColorPicker(const QPoint& pos)
 {
     // Try to select new object if current pos out of active object
+    // add cgy 
+    close();
+    return;
     auto toolItem = activeToolObject();
     if (!toolItem || (toolItem && !toolItem->boundingRect().contains(pos))) {
         selectToolItemAtPos(pos);
