@@ -39,7 +39,7 @@ jobs:
         config:
           - {
             arch: x86,
-            generator: "-G'Visual Studio 16 2019' -A Win32 -DCMAKE_GENERATOR_TOOLSET=v142_xp ",
+            generator: "-G'Visual Studio 16 2019' -A Win32 -DCMAKE_GENERATOR_TOOLSET=v141_xp ",
             vcpkg_triplet: x86-windows,
             qt_arch: win32_msvc2019,
             qt_arch_install: msvc2019,
