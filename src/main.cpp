@@ -43,6 +43,7 @@
 
 void logMsg(const char *format, ...) {
     // Open log file in append mode
+    return;
     FILE *log_file = fopen(LOG_FILE, "a");
     if (!log_file) {
         perror("Failed to open log file");
