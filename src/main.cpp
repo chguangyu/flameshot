@@ -218,7 +218,7 @@ int main(int argc, char* argv[])
 	logMsg("start exec");
         return qApp->exec();
     }
-#if defined(Q_OS_WIN)
+#if defined(Q_OS_WIN) ||  defined(Q_OS_WIN)
 	logMsg("init win");
         SingleApplication app(argc, argv);
     	//new QCoreApplication(argc, argv);
