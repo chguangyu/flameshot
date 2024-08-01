@@ -185,7 +185,7 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
 // CLASS CONFIGHANDLER
 //cgy
 ConfigHandler::ConfigHandler()
-  : m_settings("anyshot.ini",QSettings::IniFormat)
+  : m_settings(QCoreApplication::applicationDirPath()+"/anyshot.ini",QSettings::IniFormat)
 /*
 ConfigHandler::ConfigHandler()
   : m_settings(QSettings::IniFormat,
