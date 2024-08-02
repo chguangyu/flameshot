@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - wincmd
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
