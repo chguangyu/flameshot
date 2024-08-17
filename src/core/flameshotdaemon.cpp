@@ -168,10 +168,13 @@ void FlameshotDaemon::sendTrayNotification(const QString& text,
                                            const QString& title,
                                            const int timeout)
 {
+//cgy
+/*
     if (m_trayIcon) {
         m_trayIcon->showMessage(
           title, text, QIcon(GlobalValues::iconPath()), timeout);
     }
+*/
 }
 
 #if !defined(DISABLE_UPDATE_CHECKER)
