@@ -34,6 +34,8 @@ ImgUploaderBase::ImgUploaderBase(const QPixmap& capture, QWidget* parent)
   : QWidget(parent)
   , m_pixmap(capture)
 {
+//cgy
+/*
     setWindowTitle(tr("Upload image"));
     setWindowIcon(QIcon(GlobalValues::iconPath()));
 
@@ -56,6 +58,7 @@ ImgUploaderBase::ImgUploaderBase(const QPixmap& capture, QWidget* parent)
     m_vLayout->addWidget(m_infoLabel);
 
     setAttribute(Qt::WA_DeleteOnClose);
+*/
 }
 
 LoadSpinner* ImgUploaderBase::spinner()

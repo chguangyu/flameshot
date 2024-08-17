@@ -146,7 +146,16 @@ void Flameshot::screen(CaptureRequest req, const int screenNumber)
 
     if (screenNumber < 0) {
         QPoint globalCursorPos = QCursor::pos();
-        screen = qApp->screenAt(globalCursorPos);
+        //screen = qApp->screenAt(globalCursorPos);
+	//cgy
+	for (QScreen *s : qApp->screens()) {
+	  if (s->geometry().contains(globalCursorPos)) {
+	        screen = s;
+                break;
+        	}
+    	}
+
+
     } else if (screenNumber >= qApp->screens().count()) {
         AbstractLogger() << QObject::tr(
           "Requested screen exceeds screen count");

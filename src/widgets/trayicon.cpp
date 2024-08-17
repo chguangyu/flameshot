@@ -66,6 +66,8 @@ TrayIcon::TrayIcon(QObject* parent)
     show(); // TODO needed?
 
     if (ConfigHandler().showStartupLaunchMessage()) {
+//cgy
+/*
         showMessage(
           "Flameshot",
           QObject::tr(
@@ -73,6 +75,7 @@ TrayIcon::TrayIcon(QObject* parent)
             "click with a right button to see more options."),
           icon,
           3000);
+*/
     }
 
     connect(ConfigHandler::getInstance(),

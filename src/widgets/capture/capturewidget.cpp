@@ -423,7 +423,8 @@ void CaptureWidget::showxywh()
 void CaptureWidget::initHelpMessage()
 {
     QList<QPair<QString, QString>> keyMap;
-    keyMap << QPair(tr("Mouse"), tr("Select screenshot area"));
+//cgy
+    keyMap << QPair<QString, QString>(tr("Mouse"), tr("Select screenshot area"));
     using CT = CaptureTool;
     for (auto toolType : { CT::TYPE_ACCEPT, CT::TYPE_SAVE, CT::TYPE_COPY }) {
         if (!m_tools.contains(toolType)) {
@@ -434,14 +435,14 @@ void CaptureWidget::initHelpMessage()
           ConfigHandler().shortcut(QVariant::fromValue(toolType).toString());
         shortcut.replace("Return", "Enter");
         if (!shortcut.isEmpty()) {
-            keyMap << QPair(shortcut, tool->description());
+            keyMap << QPair<QString, QString>(shortcut, tool->description());
         }
     }
-    keyMap << QPair(tr("Mouse Wheel"), tr("Change tool size"));
-    keyMap << QPair(tr("Right Click"), tr("Show color picker"));
-    keyMap << QPair(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL"),
+    keyMap << QPair<QString, QString>(tr("Mouse Wheel"), tr("Change tool size"));
+    keyMap << QPair<QString, QString>(tr("Right Click"), tr("Show color picker"));
+    keyMap << QPair<QString, QString>(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL"),
                     tr("Open side panel"));
-    keyMap << QPair(tr("Esc"), tr("Exit"));
+    keyMap << QPair<QString, QString>(tr("Esc"), tr("Exit"));
 
     m_helpMessage = OverlayMessage::compileFromKeyMap(keyMap);
 }
