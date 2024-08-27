@@ -19,6 +19,10 @@
 #if defined(Q_OS_MACOS)
 #include <QScreen>
 #endif
+template<typename... Args, typename R, typename C>
+constexpr auto qOverload(R (C::*ptr)(Args...)) -> R (C::*)(Args...) {
+    return ptr;
+}
 
 SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
   : QWidget(parent)

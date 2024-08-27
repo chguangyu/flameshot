@@ -62,9 +62,9 @@ bool verifyLaunchFile()
 #define SHORTCUT(NAME, DEFAULT_VALUE)                                          \
     {                                                                          \
         QStringLiteral(NAME), QSharedPointer<KeySequence>(new KeySequence(     \
-                                QKeySequence(QLatin1String(DEFAULT_VALUE))))   \
+                                QKeySequence(QString(DEFAULT_VALUE))))   \
     }
-
+// cgy 5.5.1
 /**
  * This map contains all the information that is needed to parse, verify and
  * preprocess each configuration option in the General section.

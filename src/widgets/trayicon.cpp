@@ -9,7 +9,8 @@
 #include <QMenu>
 #include <QTimer>
 #include <QUrl>
-#include <QVersionNumber>
+//cgy 5.5.1
+//#include <QVersionNumber>
 
 #if defined(Q_OS_MACOS)
 #include <QOperatingSystemVersion>

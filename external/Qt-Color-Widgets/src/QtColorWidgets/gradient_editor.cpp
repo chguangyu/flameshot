@@ -332,15 +332,29 @@ void GradientEditor::mouseReleaseEvent(QMouseEvent *ev)
     else if ( ev->button() == Qt::RightButton )
     {
         QMenu menu(this);
+//cgy 5.5
+QAction *action = new QAction(QIcon::fromTheme("list-add"), tr("Add Color"), this);
+
+menu.addAction(action);
+
+connect(action, &QAction::triggered, this, [this, ev] {
+    p->add_color_mouse(ev, this);
+    Q_EMIT selectedStopChanged(p->selected);
+    Q_EMIT stopsChanged(p->stops);
+    update();
+});
+/*
         menu.addAction(QIcon::fromTheme("list-add"), tr("Add Color"), this, [this, ev]{
             p->add_color_mouse(ev, this);
             Q_EMIT selectedStopChanged(p->selected);
             Q_EMIT stopsChanged(p->stops);
             update();
         });
+*/
         if ( p->highlighted != -1 )
         {
             int h = p->highlighted; // leaveEvent resets it when showing the menu
+/*
             menu.addAction(QIcon::fromTheme("list-remove"), tr("Remove Color"), this, [this, h]{
                 p->stops.remove(h);
                 p->highlighted = -1;
@@ -349,12 +363,32 @@ void GradientEditor::mouseReleaseEvent(QMouseEvent *ev)
                 Q_EMIT stopsChanged(p->stops);
                 update();
             });
+*/
+	QAction *removeAction = new QAction(QIcon::fromTheme("list-remove"), tr("Remove Color"), this);
+	menu.addAction(removeAction);
+	connect(removeAction, &QAction::triggered, this, [this, h] {
+    		p->stops.remove(h);
+    		p->highlighted = -1;
+    p->refresh_gradient();
+    Q_EMIT selectedStopChanged(p->selected);
+    Q_EMIT stopsChanged(p->stops);
+    update();
+});
+QAction *editAction = new QAction(QIcon::fromTheme("document-edit"), tr("Edit Color..."), this);
+
+menu.addAction(editAction);
+
+connect(editAction, &QAction::triggered, this, [this, h] {
+    p->highlighted = h;
+    p->show_dialog_highlighted();
+});
+/*
             menu.addAction(QIcon::fromTheme("document-edit"), tr("Edit Color..."), this, [this, h]{
                 p->highlighted = h;
                 p->show_dialog_highlighted();
             });
+*/
         }
-
         menu.exec(ev->globalPos());
     }
     else

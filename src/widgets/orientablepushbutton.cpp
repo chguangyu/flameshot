@@ -44,13 +44,20 @@ void OrientablePushButton::paintEvent(QPaintEvent* event)
     if (m_orientation == OrientablePushButton::VerticalTopToBottom) {
         painter.rotate(90);
         painter.translate(0, -1 * width());
-        option.rect = option.rect.transposed();
+	QRect rect = option.rect;
+	rect = QRect(rect.topLeft(), QSize(rect.height(), rect.width()));
+        option.rect = rect;
+//cgy
+      //  option.rect = option.rect.transposed();
     }
 
     else if (m_orientation == OrientablePushButton::VerticalBottomToTop) {
         painter.rotate(-90);
         painter.translate(-1 * height(), 0);
-        option.rect = option.rect.transposed();
+	QRect rect = option.rect;
+	rect = QRect(rect.topLeft(), QSize(rect.height(), rect.width()));
+        option.rect = rect;
+        //option.rect = option.rect.transposed();
     }
 
     painter.drawControl(QStyle::CE_PushButton, option);

@@ -107,7 +107,9 @@ bool PinWidget::scrollEvent(QWheelEvent* event)
     if (phase == Qt::ScrollPhase::ScrollUpdate
 #if defined(Q_OS_LINUX) || defined(Q_OS_WINDOWS)
         // Linux is getting only NoScrollPhase events.
-        || phase == Qt::ScrollPhase::NoScrollPhase
+//cgy 5.5.1
+	|| (phase == Qt::ScrollBegin || phase == Qt::ScrollUpdate || phase == Qt::ScrollEnd)
+        //|| phase == Qt::ScrollPhase::NoScrollPhase
 #endif
     ) {
         const auto angle = event->angleDelta();

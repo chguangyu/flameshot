@@ -31,8 +31,9 @@
 #include <QThread>
 #include <QTimer>
 #include <QUrl>
+/* cgy 5.5.1
 #include <QVersionNumber>
-
+*/
 #if defined(Q_OS_MACOS)
 #include <QScreen>
 #endif
@@ -275,12 +276,13 @@ void Flameshot::openSavePath()
     }
 }
 
+/* cgy 5.5.1
 QVersionNumber Flameshot::getVersion()
 {
     return QVersionNumber::fromString(
       QStringLiteral(APP_VERSION).replace("v", ""));
 }
-
+*/
 void Flameshot::setOrigin(Origin origin)
 {
     m_origin = origin;

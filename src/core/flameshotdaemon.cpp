@@ -367,7 +367,7 @@ void FlameshotDaemon::handleReplyCheckUpdates(QNetworkReply* reply)
         QJsonDocument response = QJsonDocument::fromJson(reply->readAll());
         QJsonObject json = response.object();
         m_appLatestVersion = json["tag_name"].toString().replace("v", "");
-
+	/* cgy 5.5.1
         QVersionNumber appLatestVersion =
           QVersionNumber::fromString(m_appLatestVersion);
         if (Flameshot::instance()->getVersion() < appLatestVersion) {
@@ -383,6 +383,7 @@ void FlameshotDaemon::handleReplyCheckUpdates(QNetworkReply* reply)
             sendTrayNotification(tr("You have the latest version"),
                                  "Flameshot");
         }
+	*/
     } else {
         qWarning() << "Failed to get information about the latest version. "
                    << reply->errorString();

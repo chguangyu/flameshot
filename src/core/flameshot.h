@@ -6,8 +6,9 @@
 #include "src/core/capturerequest.h"
 #include <QObject>
 #include <QPointer>
+/* cgy 5.5.1
 #include <QVersionNumber>
-
+*/
 class CaptureWidget;
 class ConfigWindow;
 class InfoWindow;
@@ -44,7 +45,8 @@ public slots:
 
     void openSavePath();
 
-    QVersionNumber getVersion();
+    // cgy 5.5.1
+//QVersionNumber getVersion();
 
 public:
     static void setOrigin(Origin origin);

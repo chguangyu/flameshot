@@ -11,6 +11,16 @@
 #include "src/widgets/imagelabel.h"
 #include <QMimeData>
 
+
+template<typename... Args>
+struct QOverload {
+    template<typename R, typename C>
+    static constexpr auto of(R (C::*ptr)(Args...)) -> decltype(ptr) {
+        return ptr;
+    }
+};
+
+
 // https://github.com/KDE/spectacle/blob/941c1a517be82bed25d1254ebd735c29b0d2951c/src/Gui/KSWidget.cpp
 // https://github.com/KDE/spectacle/blob/941c1a517be82bed25d1254ebd735c29b0d2951c/src/Gui/KSMainWindow.cpp
 

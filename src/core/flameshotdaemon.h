@@ -43,9 +43,10 @@ public slots:
 
 private slots:
     void handleReplyCheckUpdates(QNetworkReply* reply);
-
+/*
 signals:
     void newVersionAvailable(QVersionNumber version);
+*/
 #endif
 
 private:

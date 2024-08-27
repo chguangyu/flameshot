@@ -20,7 +20,11 @@
 #include <QProcess>
 #include <QStandardPaths>
 #include <QTabWidget>
-
+template <typename T>
+constexpr typename std::add_const<T>::type &qAsConst(T &t) noexcept
+{
+    return t;
+}
 namespace {
 #if defined(Q_OS_WIN)
 QMap<QString, QString> catIconNames({ { "Graphics", "image.svg" },

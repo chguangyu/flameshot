@@ -8,6 +8,13 @@
 #include <QString>
 #include <QTextStream>
 
+template <typename T>
+constexpr typename std::add_const<T>::type &qAsConst(T &t) noexcept
+{
+    return t;
+}
+
+
 DesktopFileParser::DesktopFileParser()
 {
     QString locale = QLocale().name();

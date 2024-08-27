@@ -95,7 +95,8 @@ QString ShowSaveFileDialog(const QString& title, const QString& directory)
     dialog.selectMimeTypeFilter(defaultMimeType);
     dialog.setDefaultSuffix(suffix);
     if (dialog.exec() == QDialog::Accepted) {
-        return dialog.selectedFiles().constFirst();
+	//cgy 5.5.1
+        return dialog.selectedFiles().first();
     } else {
         return {};
     }
