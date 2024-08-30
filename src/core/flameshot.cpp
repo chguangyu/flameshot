@@ -303,6 +303,23 @@ bool Flameshot::resolveAnyConfigErrors()
     ConfigHandler confighandler;
     if (!confighandler.checkUnrecognizedSettings() ||
         !confighandler.checkSemantics()) {
+//cgy
+	ConfigHandler config;
+	QList<QString> unrecognized;
+	 QList<QString> semanticallyWrong;
+	
+	config.checkUnrecognizedSettings(nullptr, &unrecognized);
+	config.checkSemantics(nullptr, &semanticallyWrong);
+        for ( key : semanticallyWrong) {
+                ConfigHandler().resetValue(key);
+        }
+        for (key : unrecognized) {
+                ConfigHandler().remove(key);
+        }
+
+        qApp->processEvents();
+        return resolved;
+    
         auto* resolver = new ConfigResolver();
         QObject::connect(
           resolver, &ConfigResolver::rejected, [resolver, &resolved]() {
